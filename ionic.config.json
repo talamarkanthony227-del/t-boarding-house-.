@@ -1,0 +1,7 @@
+{
+  "name": "boarding-house",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
