@@ -1,0 +1,178 @@
+<ion-header>
+  <ion-toolbar class="app-toolbar">
+    <ion-title>
+      <span class="brand-mark"><ion-icon name="home-outline"></ion-icon></span>
+      <span>TUPAZ BH</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding app-page">
+  <main class="page-shell">
+  <div class="page-heading">
+    <p class="page-eyebrow">BOARDING HOUSE · PEOPLE</p>
+    <h1>Manage tenants</h1>
+    <p>Keep your resident records up to date and in the right order.</p>
+  </div>
+
+  @if (isBusy) {
+    <ion-text color="medium">
+      <p>{{ busyMessage }}</p>
+    </ion-text>
+  }
+
+  <div class="manage-intro">
+    <ion-icon name="information-circle-outline"></ion-icon>
+    <span>I-drag ang handle para ayusin ang pagkakasunod-sunod. Pindutin ang edit para baguhin ang tenant o status.</span>
+  </div>
+
+  @if (loadError) {
+    <ion-card class="surface-card" color="danger">
+      <ion-card-content>
+        <p>Could not load tenants: {{ loadError }}</p>
+        <ion-button fill="outline" color="light" (click)="loadTenants()">
+          Try again
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  }
+
+  @if (!isLoading && !loadError && tenants.length === 0) {
+    <ion-card class="surface-card empty-state">
+      <ion-card-content>
+        <ion-icon name="people-outline"></ion-icon>
+        <p>Wala pang tenant na maaaring i-manage.</p>
+      </ion-card-content>
+    </ion-card>
+  }
+
+  @if (tenants.length > 0 && !loadError) {
+    <ion-list lines="none">
+      <ion-reorder-group
+        aria-label="Reorder tenants"
+        [disabled]="tenants.length < 2 || isBusy"
+        (ionItemReorder)="handleReorder($event)">
+        @for (tenant of tenants; track tenant.id) {
+          <ion-item class="manage-card">
+            <ion-label>
+              <h2>{{ tenant.name }}</h2>
+              <p>Room {{ tenant.roomNumber }} · {{ tenant.contact }}</p>
+              <ion-badge
+                [color]="tenant.status === 'active' ? 'success' : 'medium'">
+                {{ tenant.status | titlecase }}
+              </ion-badge>
+            </ion-label>
+
+            <ion-button
+              fill="clear"
+              [disabled]="isBusy"
+              [attr.aria-label]="'Edit ' + tenant.name"
+              (click)="openEditModal(tenant)">
+              <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+
+            <ion-button
+              fill="clear"
+              color="danger"
+              [disabled]="isBusy"
+              [attr.aria-label]="'Delete ' + tenant.name"
+              (click)="confirmDelete(tenant)">
+              <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+
+            <ion-reorder
+              slot="end"
+              [attr.aria-label]="'Reorder ' + tenant.name">
+            </ion-reorder>
+          </ion-item>
+        }
+      </ion-reorder-group>
+    </ion-list>
+  }
+  </main>
+</ion-content>
+
+<ion-modal
+  [isOpen]="isEditModalOpen"
+  (didDismiss)="closeEditModal()"
+  aria-label="Edit tenant details">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Edit Tenant</ion-title>
+        <ion-buttons slot="end">
+          <ion-button [disabled]="isBusy" (click)="closeEditModal()">
+            Cancel
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <form class="modal-form" #editForm="ngForm" (ngSubmit)="saveChanges()">
+        <ion-item class="form-item">
+          <ion-input
+            label="Full Name"
+            labelPlacement="stacked"
+            name="name"
+            [(ngModel)]="editTenant.name"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="form-item">
+          <ion-input
+            label="Email"
+            labelPlacement="stacked"
+            type="email"
+            name="email"
+            [(ngModel)]="editTenant.email"
+            required
+            email>
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="form-item">
+          <ion-input
+            label="Contact Number"
+            labelPlacement="stacked"
+            type="tel"
+            name="contact"
+            [(ngModel)]="editTenant.contact"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="form-item">
+          <ion-input
+            label="Room Number"
+            labelPlacement="stacked"
+            name="roomNumber"
+            [(ngModel)]="editTenant.roomNumber"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="form-item">
+          <ion-select
+            label="Tenant Status"
+            labelPlacement="stacked"
+            name="status"
+            [value]="editTenant.status"
+            (ionChange)="setTenantStatus($event.detail.value)">
+            <ion-select-option value="active">Active</ion-select-option>
+            <ion-select-option value="inactive">Inactive</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-button
+          expand="block"
+          class="primary-action"
+          type="submit"
+          [disabled]="isBusy || editForm.invalid">
+          {{ isBusy ? busyMessage : 'Save Changes' }}
+        </ion-button>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

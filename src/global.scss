@@ -35,3 +35,348 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+:root {
+  --ion-font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --ion-color-primary: #1d5b4f;
+  --ion-color-primary-rgb: 29, 91, 79;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #195045;
+  --ion-color-primary-tint: #347063;
+  --ion-background-color: #f3f6f2;
+  --ion-text-color: #1e302a;
+  --ion-toolbar-background: #fbfcfa;
+  --ion-toolbar-color: #1e302a;
+  --ion-tab-bar-background: #fbfcfa;
+  --ion-tab-bar-color: #75827d;
+  --ion-tab-bar-color-selected: #1d5b4f;
+  --ion-border-color: #e2e9e3;
+}
+
+body {
+  background: #f3f6f2;
+  color: #1e302a;
+}
+
+ion-router-outlet {
+  pointer-events: none;
+}
+
+ion-router-outlet > .ion-page {
+  pointer-events: auto;
+}
+
+.app-toolbar {
+  --border-width: 0;
+  --min-height: 68px;
+  box-shadow: 0 1px 0 rgb(30 48 42 / 7%);
+}
+
+.app-toolbar ion-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 750;
+  letter-spacing: -0.035em;
+}
+
+.brand-mark {
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 12px;
+  background: #e8f1e9;
+  color: #1d5b4f;
+}
+
+.brand-mark ion-icon {
+  font-size: 19px;
+}
+
+.app-page {
+  --background: #f3f6f2;
+}
+
+.page-shell {
+  width: min(100%, 720px);
+  margin: 0 auto;
+  padding: 14px 0 28px;
+}
+
+.page-heading {
+  margin: 8px 2px 24px;
+}
+
+.page-eyebrow {
+  margin: 0 0 8px;
+  color: #648077;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.page-heading h1 {
+  margin: 0;
+  color: #1e302a;
+  font-size: clamp(27px, 7vw, 34px);
+  font-weight: 760;
+  letter-spacing: -0.055em;
+  line-height: 1.12;
+}
+
+.page-heading > p:last-child {
+  max-width: 430px;
+  margin: 10px 0 0;
+  color: #6b7973;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.surface-card {
+  margin: 0 0 16px;
+  border: 1px solid #e7ece7;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(34 61 48 / 5%);
+}
+
+.surface-card ion-card-header {
+  padding: 22px 22px 8px;
+}
+
+.surface-card ion-card-title {
+  color: #1e302a;
+  font-size: 18px;
+  font-weight: 730;
+  letter-spacing: -0.025em;
+}
+
+.surface-card ion-card-subtitle {
+  margin-top: 5px;
+  color: #78857f;
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.surface-card ion-card-content {
+  padding: 12px 22px 22px;
+}
+
+.form-item {
+  --background: #f8faf7;
+  --border-color: #e6ebe6;
+  --border-radius: 12px;
+  --inner-border-width: 0;
+  --min-height: 64px;
+  margin: 0 0 10px;
+  border: 1px solid #e6ebe6;
+  border-radius: 12px;
+}
+
+.form-item ion-input,
+.form-item ion-select {
+  --padding-start: 13px;
+  --padding-end: 13px;
+  --highlight-color-focused: #1d5b4f;
+  font-size: 14px;
+}
+
+.primary-action {
+  --border-radius: 13px;
+  --box-shadow: none;
+  height: 50px;
+  margin-top: 18px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.search-control {
+  --background: #fff;
+  --border-radius: 14px;
+  --box-shadow: 0 4px 16px rgb(34 61 48 / 5%);
+  --icon-color: #718078;
+  --placeholder-color: #89958f;
+  margin: 0 0 14px;
+  padding: 0;
+}
+
+.filter-segment {
+  margin: 0 0 20px;
+  padding: 4px;
+  border: 1px solid #e5ebe5;
+  border-radius: 14px;
+  background: #eaf0e9;
+}
+
+.filter-segment ion-segment-button {
+  --border-radius: 10px;
+  --color: #6a7972;
+  --color-checked: #1e302a;
+  --indicator-color: #fff;
+  min-height: 38px;
+  font-size: 12px;
+  font-weight: 650;
+  text-transform: none;
+}
+
+.tenant-card {
+  margin: 0 0 12px;
+  border: 1px solid #e7ece7;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgb(34 61 48 / 4%);
+}
+
+.tenant-card ion-card-header {
+  padding: 18px 18px 6px;
+}
+
+.tenant-card ion-card-title {
+  color: #1e302a;
+  font-size: 16px;
+  font-weight: 730;
+}
+
+.tenant-card ion-card-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 7px;
+  color: #738078;
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.tenant-card ion-card-subtitle ion-badge,
+.manage-card ion-badge {
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.tenant-card ion-card-content {
+  padding: 8px 18px 16px;
+}
+
+.tenant-details {
+  display: grid;
+  gap: 9px;
+}
+
+.tenant-details p {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  color: #66756e;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.tenant-details ion-icon {
+  flex: 0 0 auto;
+  color: #84968d;
+  font-size: 16px;
+}
+
+.empty-state {
+  padding: 18px 12px;
+  color: #6b7973;
+  text-align: center;
+}
+
+.empty-state ion-card-content {
+  padding: 24px 18px;
+}
+
+.empty-state ion-icon {
+  display: block;
+  margin: 0 auto 10px;
+  color: #789388;
+  font-size: 28px;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.manage-intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 15px 16px;
+  border: 1px solid #dfeae0;
+  border-radius: 16px;
+  background: #eaf2e9;
+  color: #536b60;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.manage-intro ion-icon {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: #397261;
+  font-size: 19px;
+}
+
+.manage-card {
+  --background: #fff;
+  --inner-border-width: 0;
+  --inner-padding-end: 8px;
+  --min-height: 88px;
+  --padding-start: 16px;
+  margin: 0 0 10px;
+  overflow: hidden;
+  border: 1px solid #e7ece7;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 5px 18px rgb(34 61 48 / 4%);
+}
+
+.manage-card h2 {
+  margin: 0 0 5px;
+  color: #1e302a;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.manage-card p {
+  margin: 0 0 8px;
+  color: #78857f;
+  font-size: 12px;
+}
+
+.manage-card ion-button {
+  --color: #557168;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  margin: 0 2px;
+}
+
+.manage-card ion-button[color="danger"] {
+  --color: #bf6660;
+}
+
+.modal-form {
+  padding-top: 12px;
+}
+
+@media (min-width: 768px) {
+  .page-shell {
+    padding-top: 28px;
+  }
+}

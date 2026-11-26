@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar class="app-toolbar">
+    <ion-title>
+      <span class="brand-mark"><ion-icon name="home-outline"></ion-icon></span>
+      <span>TUPAZ BH</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding app-page">
+  <main class="page-shell">
+  <div class="page-heading">
+    <p class="page-eyebrow">BOARDING HOUSE · PEOPLE</p>
+    <h1>Tenant directory</h1>
+    <p>Find resident details and see who currently calls this place home.</p>
+  </div>
+
+  <ion-searchbar
+    class="search-control"
+    aria-label="Search tenants"
+    placeholder="Search name, room, contact, or email"
+    [debounce]="250"
+    (ionInput)="onSearchChange($event)">
+  </ion-searchbar>
+
+  <ion-segment
+    class="filter-segment"
+    aria-label="Filter tenants by status"
+    [(ngModel)]="statusFilter">
+    <ion-segment-button value="all">
+      <ion-label>All ({{ tenants.length }})</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="active">
+      <ion-label>Active</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="inactive">
+      <ion-label>Inactive</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  @if (loadError) {
+    <ion-card class="surface-card" color="danger">
+      <ion-card-content>
+        <p>Could not load tenants: {{ loadError }}</p>
+        <ion-button fill="outline" color="light" (click)="loadTenants()">
+          Try again
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  }
+
+  @if (!isLoading && !loadError && tenants.length === 0) {
+    <ion-card class="surface-card empty-state">
+      <ion-card-content>
+        <ion-icon name="people-outline"></ion-icon>
+        <p>Wala pang tenant na naidagdag.</p>
+      </ion-card-content>
+    </ion-card>
+  }
+
+  @for (tenant of filteredTenants; track tenant.id) {
+    <ion-card class="tenant-card">
+      <ion-card-header>
+        <ion-card-title>{{ tenant.name }}</ion-card-title>
+        <ion-card-subtitle>
+          <span>Room {{ tenant.roomNumber }}</span>
+          <ion-badge
+            [color]="tenant.status === 'active' ? 'success' : 'medium'">
+            {{ tenant.status | titlecase }}
+          </ion-badge>
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="tenant-details">
+          <p><ion-icon name="mail-outline"></ion-icon><span>{{ tenant.email }}</span></p>
+          <p><ion-icon name="call-outline"></ion-icon><span>{{ tenant.contact }}</span></p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  }
+
+  @if (
+      !isLoading &&
+      !loadError &&
+      tenants.length > 0 &&
+      filteredTenants.length === 0
+  ) {
+    <ion-card class="surface-card empty-state">
+      <ion-card-content>
+        <ion-icon name="search-outline"></ion-icon>
+        <p>Walang tenant na tumutugma sa filter.</p>
+      </ion-card-content>
+    </ion-card>
+  }
+  </main>
+</ion-content>
+
+<ion-loading
+  [isOpen]="isLoading"
+  message="Loading tenants..."
+  spinner="crescent">
+</ion-loading>

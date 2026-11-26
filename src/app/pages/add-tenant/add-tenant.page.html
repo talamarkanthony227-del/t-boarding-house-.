@@ -1,0 +1,88 @@
+
+<ion-header>
+  <ion-toolbar class="app-toolbar">
+    <ion-title>
+      <span class="brand-mark"><ion-icon name="home-outline"></ion-icon></span>
+      <span>TUPAZ BH</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding app-page">
+  <main class="page-shell">
+    <div class="page-heading">
+      <p class="page-eyebrow">BOARDING HOUSE · PEOPLE</p>
+      <h1>Add a tenant</h1>
+      <p>Bring a new resident into your home and keep their details in one place.</p>
+    </div>
+
+  <ion-card class="surface-card">
+    <ion-card-header>
+      <ion-card-title>Tenant Information</ion-card-title>
+      <ion-card-subtitle>A few details to get started</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form #tenantForm="ngForm" (ngSubmit)="saveTenant()">
+        <ion-item class="form-item">
+          <ion-input
+            label="Full Name"
+            labelPlacement="stacked"
+            placeholder="Enter full name"
+            name="name"
+            [(ngModel)]="tenant.name"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="form-item">
+          <ion-input
+            label="Email"
+            labelPlacement="stacked"
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            [(ngModel)]="tenant.email"
+            required
+            email>
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="form-item">
+          <ion-input
+            label="Contact Number"
+            labelPlacement="stacked"
+            type="tel"
+            placeholder="Enter contact number"
+            name="contact"
+            [(ngModel)]="tenant.contact"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="form-item">
+          <ion-input
+            label="Room Number"
+            labelPlacement="stacked"
+            placeholder="Enter room number"
+            name="roomNumber"
+            [(ngModel)]="tenant.roomNumber"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-button
+          expand="block"
+          class="primary-action"
+          type="submit"
+          [disabled]="isSaving || tenantForm.invalid">
+          @if (!isSaving) {
+            <ion-icon name="person-add-outline" slot="start"></ion-icon>
+          }
+          {{ isSaving ? 'Saving...' : 'Add Tenant' }}
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  </main>
+</ion-content>
